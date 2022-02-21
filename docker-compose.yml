@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+ api:
+    container_name: api
+    build: ./
+    ports:
+    - "3000:3000"
+    command: npm run start:dev
+
+ redis:
+
+   image: 'redis:latest'
+   container_name: redis
+   restart: always
+   environment:
+    - ALLOW_EMPTY_PASSWORD=yes
+    - 'REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL'
+   command:
+    - redis-server
+    - '--bind'
+    - redis
+    - '--port'
+    - '6378'
+   volumes:
+    - 'redis_data:/usr/local/etc/redis/redis.conf'
+  ports:
+    - '6378:6378'
+ nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
