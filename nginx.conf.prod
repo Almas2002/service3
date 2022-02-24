@@ -4,4 +4,7 @@ server{
     location / {
        proxy_pass http://redis:6379;
     }
+    location /docker {
+       proxy_pass http://jenkins:8099;
+    }
 }
