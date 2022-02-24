@@ -1,14 +1,14 @@
 version: "3.9"
 
 services:
- api:
+  api:
     container_name: api
     build: ./
     ports:
     - "3000:3000"
     command: npm run start:dev
 
- redis:
+  redis:
 
    image: 'redis:latest'
    container_name: redis
@@ -21,12 +21,12 @@ services:
     - '--bind'
     - redis
     - '--port'
-    - '6378'
+    - '6379'
    volumes:
     - 'redis_data:/usr/local/etc/redis/redis.conf'
-  ports:
-    - '6378:6378'
- nginx:
+   ports:
+    - '6379:6379'
+  nginx:
     image: nginx:stable-alpine
     container_name: nginx
     ports:

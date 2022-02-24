@@ -7,7 +7,7 @@ async function bootstrap() {
 
     transport: Transport.REDIS,
     options: {
-      url:'redis://redis:6378',
+      url:'redis://redis:6379',
     }
   });
   await app.listen();
