@@ -35,6 +35,15 @@ services:
       - ./nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - redis
+  jenkins:
+    restart: on-failure:10
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    ports:
+      - 8099:8080
+    volumes:
+     - jenkins:/var/jenkins_home
 
 volumes:
   redis_data:
+  jenkins:
