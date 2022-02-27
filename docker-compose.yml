@@ -40,7 +40,7 @@ services:
     image: jenkins/jenkins:latest
     container_name: jenkins
     ports:
-      - 8099:8080
+      - "8099:8080"
     volumes:
      - jenkins:/var/jenkins_home
 
