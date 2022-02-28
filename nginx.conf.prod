@@ -1,10 +1,20 @@
 server{
+
     listen 80;
+    autoindex on;
     server_name 164.92.204.107;
-    location / {
+    location = /api {
        proxy_pass http://redis:6379;
     }
-    location /docker {
-       proxy_pass http://jenkins:8099;
-    }
+    location /{
+     proxy_pass http://jenkins:8080/;
+}
+}
+server{
+listen 8080;
+server_name 164.92.204.107;
+
+location / {
+proxy_pass http://jenkins:8080;
+}
 }
